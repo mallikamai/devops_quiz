@@ -1,0 +1,31 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+
+Build:
+  # Define stage
+  stage: build
+  # What to run on the job.
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules
+
+Test:
+  stage: test
+  script:
+    - npm run start
+    - node index.js
+
+
+Deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo 'Done!'
